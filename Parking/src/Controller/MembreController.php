@@ -105,5 +105,12 @@ class MembreController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+
+    }
+
+    // login
+
+    public function login(){
+        
     }
 }
