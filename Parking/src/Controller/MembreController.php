@@ -110,6 +110,14 @@ class MembreController extends AppController
 
     // Lofin
     public function login(){
-        
+        if ($this->request->is('post')){
+            $membre = $this->Auth->identify();
+            if ($membre){
+                $this->Auth->setUser($membre);
+                return $this->redirect(['controller' => 'membre']);
+            }
+
+            $this->Flash->error('Erreur');
+        }
     }
 }
