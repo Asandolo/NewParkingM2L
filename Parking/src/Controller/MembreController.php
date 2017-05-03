@@ -106,4 +106,10 @@ class MembreController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    // Lofin
+    public function login(){
+        
+    }
 }
