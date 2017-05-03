@@ -37,7 +37,7 @@ class Membre extends Entity
         'id_membre' => false
     ];
 
-    protected function setpsw_membre($psw){
+    protected function _setpsw_membre($psw){
         return md5($psw);
     }
 }
