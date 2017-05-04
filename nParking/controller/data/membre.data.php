@@ -3,13 +3,13 @@ include("config/db.php");
 
 function getInfoConnect($mail){
     $info = $GLOBALS["bdd"]->prepare("SELECT * FROM membre WHERE mail_membre = ?");
-    $info->execute($mail);
+    $info->execute(array($mail));
     return $info;
 }
 
 function MailExiste($mail){
 	$verif=$GLOBALS["bdd"]->prepare("SELECT mail_membre AS  FROM membre WHERE mail_membre=?");
-  	$verif->execute(array($mail));
+  	$verif->execute($mail);
   	return $verif;
 }
 

@@ -6,10 +6,10 @@ include ("data/membre.data.php");
 
 //VERIFIE MAIL ET MOT DE PASSE
 function isValid($mail, $psw){
+	$psw = hashMdp($psw);
     $i = getInfoConnect($mail);
     $data = $i->fetch();
     if ($data["psw_membre"] == $psw){
-    	
         return true;
     }
     else{

@@ -10,8 +10,7 @@ if(isset($_POST["conect"]))
 {
   $mail= $_POST["mail"];
   $psw = $_POST["psw"];
-  $hashPsw = hashMdp($psw);
-  if (isValid($mail,$hashPsw)) {
+  if (isValid($mail,$psw)) {
      
     if(isValidMembre($mail))
     {
@@ -24,7 +23,7 @@ if(isset($_POST["conect"]))
     }
 
   }else{
-    $error = $hashpsw;
+    $error = "Erreur de saisie de l'email ou du mot de passe";
   }
 
 }  
