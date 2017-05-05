@@ -29,17 +29,17 @@ include("controller/reserver.ctrl.php");
 					$d = getHistoriqueMembre($user["id"]);
 					foreach($d as $donnee) 
 					{
-						$debut = strtotime($donnee['date_debut_periode']);
-						$fin = strtotime($donnee['date_fin_periode']);
-						?>
-						<tr>
-							<td><?php echo $donnee['num_place'];?></td>
-							<td><?php echo date("d/m/Y",$debut);?></td>
-							<td><?php echo date("d/m/Y",$fin);?></td>
-							<td><?php echo ($debut <= $tsajd && $fin >= $tsajd)?"<span style='color:green;'>Actuelle</span>":"<span style='color:red;'>Expirée</span>";?></td>
-						</tr>
+							$debut = strtotime($donnee['date_debut_periode']);
+							$fin = strtotime($donnee['date_fin_periode']);
+							?>
+							<tr>
+								<td><?php echo $donnee['num_place'];?></td>
+								<td><?php echo date("d/m/Y",$debut);?></td>
+								<td><?php echo date("d/m/Y",$fin);?></td>
+								<td><?php echo ($debut <= $tsajd && $fin >= $tsajd)?"<span 	style='color:green;'>Actuelle</span>":"<span style='color:red;'>Expirée</span>";?></td>
+							</tr>
+							<?php
 						
-						<?php
 					}
 					?>
 				</table>

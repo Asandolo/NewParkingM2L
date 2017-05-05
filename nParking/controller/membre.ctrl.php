@@ -148,7 +148,8 @@ function getMembresAdmins(){
     		"adCP_membre" => $data["adCP_membre"],
     		"adVille_membre" => $data["adVille_membre"],
     		"rang" => $data["rang"],
-    		"valide_membre" => $data["valide_membre"]));
+    		"valide_membre" => $data["valide_membre"]
+    	));
 		$i++;
     }
     return $membres;

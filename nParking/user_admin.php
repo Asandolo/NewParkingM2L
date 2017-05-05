@@ -83,78 +83,78 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							</td>
 						</tr>
 						<?php
-						}
 					}
+				}
 
 						?>
-				</table>
-			</center>
-		</div>
-		<div class="col-md-12 black" style="overflow: auto;">
-			<center>
-				<h3>Non vérifié</h3>
-				<table class="table table-bordered">
-					<tr>
-						<th>#</th>
-						<th>Civilite</th>
-						<th>Nom</th>
-						<th>Prenom</th>
-						<th>Actions</th>
-					</tr>
+			</table>
+		</center>
+	</div>
+	<div class="col-md-12 black" style="overflow: auto;">
+		<center>
+			<h3>Non vérifié</h3>
+			<table class="table table-bordered">
+				<tr>
+					<th>#</th>
+					<th>Civilite</th>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Actions</th>
+				</tr>
+				<?php
+				$nonverifs = $bdd->query("SELECT * FROM `membre` WHERE `valide_membre` = 0;");
+				$cnonverifs=$nonverifs->rowCount();
+				if ($cnonverifs == 0) {
+					?>
+					<td colspan="12">Il n'y as pas de membre dans cette section</td>
 					<?php
-					$nonverifs = $bdd->query("SELECT * FROM `membre` WHERE `valide_membre` = 0;");
-					$cnonverifs=$nonverifs->rowCount();
-					if ($cnonverifs == 0) {
+				}else{
+					while ($nonverif=$nonverifs->fetch()) {
+						$ajd = date("Y-m-d"); 
+						$tsajd = strtotime($ajd);
+						$placesnonverif = $bdd->prepare("SELECT * FROM `reserver`, `place` WHERE `id_membre` = ? AND date_debut_periode <= ? AND date_fin_periode >= ? AND `reserver`.`id_place` = `place`.`id_place`");
+						$placesnonverif->execute(array($nonverif["id_membre"],$ajd,$ajd));
+						$placenonverif = $placesnonverif->fetch();
+						$countnonverif = $placesnonverif->rowCount();
 						?>
-						<td colspan="12">Il n'y as pas de membre dans cette section</td>
-						<?php
-					}else{
-						while ($nonverif=$nonverifs->fetch()) {
-							$ajd = date("Y-m-d"); 
-							$tsajd = strtotime($ajd);
-							$placesnonverif = $bdd->prepare("SELECT * FROM `reserver`, `place` WHERE `id_membre` = ? AND date_debut_periode <= ? AND date_fin_periode >= ? AND `reserver`.`id_place` = `place`.`id_place`");
-							$placesnonverif->execute(array($nonverif["id_membre"],$ajd,$ajd));
-							$placenonverif = $placesnonverif->fetch();
-							$countnonverif = $placesnonverif->rowCount();
-							?>
-							<tr>
-								<td><?php echo $nonverif["id_membre"]; ?></td>
-								<td><?php echo $nonverif["civilite_membre"]; ?></td>
-								<td><?php echo $nonverif["nom_membre"]; ?></td>
-								<td><?php echo $nonverif["prenom_membre"]; ?></td>
-								<td><?php echo date("d/m/Y", strtotime($nonverif["date_naiss_membre"])); ?></td>
-								<td><?php echo $nonverif["adRue_membre"]; ?></td>
-								<td><?php echo $nonverif["adCP_membre"]; ?></td>
-								<td><?php echo $nonverif["adVille_membre"]; ?></td>
-								<td><?php 
-									if ($countnonverif<=0 && $nonverif["rang"]<=0) {
-										echo "/";
-									}elseif($nonverif["rang"]<=0){
-										echo "Place :".$placenonverif["num_place"];
-									}else{
-										echo "Rang : ".$nonverif["rang"];
-									}
-									?></td>
-									<td><?php echo ($nonverif["valide_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
-									<td><?php echo ($nonverif["admin_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
-									<td>
-										<form method="POST">
-											<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
-											<input type="submit" name="activate" value="Activer" class="btn btn-success">
-										</form>
-										<form method="POST">
-											<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
-											<input type="submit" name="refu" value="Refuser" class="btn btn-danger">
-										</form>
-										<a href="modif_admin.php?id=<?php echo $nonverif["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
-									</td>
-								</tr>
-								<?php
-							}}
-							?>
-						</table>
-					</center>
-			</div>
+						<tr>
+							<td><?php echo $nonverif["id_membre"]; ?></td>
+							<td><?php echo $nonverif["civilite_membre"]; ?></td>
+							<td><?php echo $nonverif["nom_membre"]; ?></td>
+							<td><?php echo $nonverif["prenom_membre"]; ?></td>
+							<td><?php echo date("d/m/Y", strtotime($nonverif["date_naiss_membre"])); ?></td>
+							<td><?php echo $nonverif["adRue_membre"]; ?></td>
+							<td><?php echo $nonverif["adCP_membre"]; ?></td>
+							<td><?php echo $nonverif["adVille_membre"]; ?></td>
+							<td><?php 
+								if ($countnonverif<=0 && $nonverif["rang"]<=0) {
+									echo "/";
+								}elseif($nonverif["rang"]<=0){
+									echo "Place :".$placenonverif["num_place"];
+								}else{
+									echo "Rang : ".$nonverif["rang"];
+								}
+								?></td>
+								<td><?php echo ($nonverif["valide_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
+								<td><?php echo ($nonverif["admin_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
+								<td>
+									<form method="POST">
+										<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
+										<input type="submit" name="activate" value="Activer" class="btn btn-success">
+									</form>
+									<form method="POST">
+										<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
+										<input type="submit" name="refu" value="Refuser" class="btn btn-danger">
+									</form>
+									<a href="modif_admin.php?id=<?php echo $nonverif["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
+								</td>
+							</tr>
+							<?php
+						}}
+						?>
+			</table>
+		</center>
+	</div>
 	<div class="col-md-12 black" style="overflow: auto;">
 		<center>
 			<h3>Vérifié</h3>
