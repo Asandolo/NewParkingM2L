@@ -47,7 +47,8 @@ function updateProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville){
 
 
 function selectAdmins(){
-	$admins = $bdd->query("SELECT * FROM `membre` WHERE `admin_membre` = 1;");
+	$admins = $GLOBALS["bdd"]->prepare("SELECT * FROM `membre` WHERE `admin_membre` = 1;");
+	$admins->execute(array());
 	return $admins;
 }
 

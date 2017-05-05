@@ -2,7 +2,6 @@
 
 include ("data/membre.data.php");
 //include ("controller/place.ctrl.php");
-include ("reserver.ctrl.php");
 
 
 //VERIFIE MAIL ET MOT DE PASSE
@@ -134,26 +133,25 @@ function affichePlace($mail){
 ///////////// REQUETTES ADMINISTRATEUR ///////////////////
 //////////////////////////////////////////////////////////
 
-
-function getAdmins($id){
+function getMembresAdmins(){
 	$admins = selectAdmins();
-	$cadmins=$admins->rowCount();
-
-	if ($cadmins == 0) {
-		return null;
-	}
-	while ($admin=$admins->fetch()) {
-		$ajd = date("Y-m-d"); 
-		$tsajd = strtotime($ajd);
-		$placeadmin = getAllReserver($id);
-		$countadmin = $placesadmin->rowCount();
-		if($countadmin<=0){
-			return 0;
-		}
-		else{
-			return $placeadmin;
-		}
-	}
+	$i=0;
+	while($data = $admins->fetch()){
+		$membres = array($i => array(
+			"id_membre" => $data["id_membre"], 
+    		"mail_membre" => $data["mail_membre"],
+    		"civilite_membre" =>$data["civilite_membre"],
+    		"nom_membre" => $data["nom_membre"],
+    		"prenom_membre" => $data["prenom_membre"],
+    		"date_naiss_membre" => $data["date_naiss_membre"],
+    		"adRue_membre" => $data["adRue_membre"],
+    		"adCP_membre" => $data["adCP_membre"],
+    		"adVille_membre" => $data["adVille_membre"],
+    		"rang" => $data["rang"],
+    		"valide_membre" => $data["valide_membre"]));
+		$i++;
+    }
+    return $membres;
 }
 
 function setNonAdmin($id){

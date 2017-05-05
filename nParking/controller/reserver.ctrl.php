@@ -16,20 +16,6 @@ function getHistoriqueMembre($id){
 	return $historique;
 }
 
-function getAllReserver($id){
-	$place = placeActuelMembre($id);
-	$p = $place->fetch();
-	$arPlace = array(
-		"id_membre" => $p["id_membre"],
-		"id_place" => $p["id_place"],
-		"num_place" => $p["num_place"],
-		"date_debut_periode" => $p["date_debut_periode"],
-		"date_fin_periode" => $p["date_fin_periode"],
-		"num_place" => $p["num_place"]
-	);
-	return $arPlace;
-}
-
 function getReserver($id){
 	$place = placeActuelMembre($id);
 	$p = $place->fetch();
