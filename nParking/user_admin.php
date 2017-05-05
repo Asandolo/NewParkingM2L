@@ -206,7 +206,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<td>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $verif["id_membre"]; ?>">
-									<input type="submit" name="deac" class="btn btn-warning" value="Déactiver" <?php echo ($verif["admin_membre"] == 1 || $admin["id_membre"] == $user["id_membre"])?"disabled=''":"" ?>>
+									<input type="submit" name="deac" class="btn btn-warning" value="Déactiver" <?php echo ($verif["admin_membre"] == 1 || $verif["id_membre"] == $_SESSION["id"])?"disabled=''":"" ?>>
 								</form>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $verif["id_membre"]; ?>">

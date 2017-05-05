@@ -18,6 +18,12 @@ function createMembreData($mail,$hashpsw,$civilite,$nom,$prenom,$date_naiss,$rue
     $r->execute(array($mail,$hashpsw,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville));
 }
 
+function getIdByMail($mail){
+    $r = $GLOBALS["bdd"]->prepare("SELECT id FROM membre WHERE mail_membre = ?");
+    $r->execute(array($mail));
+    $d = $r ->fetch();
+    return $d["id"];
+}
 
 function getMdpMembreData($mail){
 	$verif =$GLOBALS["bdd"]->prepare("SELECT psw_membre FROM membre WHERE mail_membre = ?");

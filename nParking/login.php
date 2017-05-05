@@ -15,6 +15,7 @@ if(isset($_POST["conect"]))
     if(isValidMembre($mail))
     {
       $_SESSION["mail"] = $mail;
+      $_SESSION["id"] = getIdByMail($mail);
       header('Location: index.php');
     }
     else
