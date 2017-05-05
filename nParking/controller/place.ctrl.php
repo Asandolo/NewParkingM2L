@@ -44,7 +44,7 @@ function getNbPlace(){
 
 function getPlacesOfPage($prems,$total){
     $splace=$GLOBALS["bdd"]->prepare("SELECT * FROM `place` ORDER BY `num_place` LIMIT ?,?");
-    $splace->(array($prems,$total));
+    $splace->execute(array($prems,$total));
     return $splace;
 }
 
