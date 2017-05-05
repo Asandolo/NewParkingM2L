@@ -1,27 +1,17 @@
 <?php 
-$titre = "Acceuil";
+$titre = "Historique";
 include("includes/pages/header.php");
-include("controller/place.ctrl.php");
 include("controller/reserver.ctrl.php");
-
-
 ?>
 
-<div class="row">
 
+<div class="row">
 	<div class="col-md-12 black">
-		<center>
-			<?php
-			$ajd = date("Y-m-d");
-			$tsajd = strtotime($ajd);   
-			echo affichePlace($_SESSION["mail"]);
-			?>
-		</center>
+		<p><center>HISTORIQUE</center></p>
 	</div>
 	<div class="col-md-12 black">
 		<p>
 			<center>
-				<h2>Historique</h2>
 				<?php
 				$aujourdhui = date("Y-m-d");
 				$tsajd = strtotime($aujourdhui);
@@ -55,8 +45,6 @@ include("controller/reserver.ctrl.php");
 				</table>
 			</center>
 		</p>
-		<a href="historique.php"><button class="btn btn-info">Voir tout l'historique</button></a>
 	</div>
 </div>
-
-<?php include("includes/pages/footer.php"); ?>
+<?php include("includes/pages/footer.php");?>

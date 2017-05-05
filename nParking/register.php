@@ -23,13 +23,12 @@ if(isset($_POST['enregistrer']))
   $anne_naiss = htmlspecialchars($_POST['annee']);
 
   $date_naiss = $anne_naiss."-".$mois_naiss."-".$jour_naiss;
-  //$hashpsw = hashMdp($psw);
 
   if(!isMailExiste($mail))
   {
     $error = "Adresse e-mail déjà utilisé";
   }
-  elseif ($psw!=$ckpsw) 
+  else if ($psw!=$ckpsw) 
   {
     $error = "Mot de passe différent de la vérification";
   }
@@ -47,84 +46,9 @@ if(isset($_POST['enregistrer']))
 <head>
   <title>REGISTER</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
-  <style type="text/css">
-    body {
-      padding-top: 120px;
-      padding-bottom: 40px;
-      background-color: #eee;
-      
-    }
-    .btn 
-    {
-     outline:0;
-     border:none;
-     border-top:none;
-     border-bottom:none;
-     border-left:none;
-     border-right:none;
-     box-shadow:inset 2px -3px rgba(0,0,0,0.15);
-   }
-   .btn:focus
-   {
-     outline:0;
-     -webkit-outline:0;
-     -moz-outline:0;
-   }
-   body {
-    background-image: url('http://cleancanvas.herokuapp.com/img/backgrounds/color-splash.jpg');
-    background-repeat:no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-  }
-  .form-signin {
-    max-width: 280px;
-    padding: 15px;
-    margin: 0 auto;
-    margin-top:50px;
-  }
-  .form-signin .form-signin-heading, .form-signin {
-    margin-bottom: 10px;
-  }
-  .form-signin .form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input[type="text"] {
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: none;
-    border-left-style: solid;
-    border-color: #000;
-  }
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top-style: none;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-color: rgb(0,0,0);
-    border-top:1px solid rgba(0,0,0,0.08);
-  }
-  .form-signin-heading {
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
-  }
-</style>
+  <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css"> 
+  <link rel="stylesheet" type="text/css" href="includes/css/login.css">
+ 
 <script type="text/javascript" src="includes/js/jq.js"></script>
 <script type="text/javascript" src="includes/js/bootstrap.js"></script>
 </head>

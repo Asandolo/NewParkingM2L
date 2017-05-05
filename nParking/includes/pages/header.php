@@ -3,12 +3,11 @@ session_start();
 if (!isset($_SESSION["mail"]) ) {
 	header('Location: login.php');
 }
-include("includes/function.php");
+include("controller/membre.ctrl.php");
 
 
-$req_user = $bdd->prepare("SELECT * FROM `membre` WHERE `mail_membre` = ?");
-$req_user->execute(array($_SESSION["mail"]));
-$user = $req_user->fetch();
+$user = getMembre($_SESSION["mail"]);
+
 
 if ($user["valide_membre"] == 0) {
   header('Location: logout.php');
