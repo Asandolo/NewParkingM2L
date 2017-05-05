@@ -77,7 +77,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<td>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $admin["id_membre"]; ?>">
-									<input type="submit" value="Dégrader" class="btn btn-danger" name="degrade" <?php echo ($cadmins == 1 || $admin["id_membre"] == $user["id_membre"])?"disabled=''":"" ?>>
+									<input type="submit" value="Dégrader" class="btn btn-danger" name="degrade" <?php echo ($cadmins == 1 || $admin["id_membre"] == $_SESSION["id"])?"disabled=''":"" ?>>
 								</form>
 								<a href="modif_admin.php?id=<?php echo $admin["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
 							</td>

@@ -17,7 +17,7 @@ function getPlaceMembreDataCount($id){
 	return $d["c"];
 }
 
-function addPlaces($num){
+function addPlacesData($num){
     $s = $GLOBALS["bdd"]->query("SELECT * FROM `place` ORDER BY `id_place` DESC LIMIT 1;");
     $d=$s->fetch();
 
@@ -30,30 +30,30 @@ function addPlaces($num){
     }
 }
 
-function acPlace($id){
+function acPlaceData($id){
     $ac = $GLOBALS["bdd"]->prepare("UPDATE `place` SET `active_place` = 1 WHERE `id_place` = ?");
     $ac->execute(array($id));
 }
 
-function deAcPlace($id){
+function deAcPlaceData($id){
     $ac = $GLOBALS["bdd"]->prepare("UPDATE `place` SET `active_place` = 0 WHERE `id_place` = ?");
     $ac->execute(array($id));
 }
 
-function getNbPlace(){
+function getNbPlaceData(){
     $cplace = $GLOBALS["bdd"]->query("SELECT COUNT(*) as `total` FROM `place`");
     $count=$cplace->fetch();
     return ceil($count["total"]);
 }
 
-function getPlacesOfPage($prems,$total){
+function getPlacesOfPageData($prems,$total){
     $splace=$GLOBALS["bdd"]->prepare("SELECT * FROM `place` ORDER BY `num_place` LIMIT ?,?");
     $splace->execute(array($prems,$total));
     return $splace;
 }
 
-function getCountHist($id){
-    $histcount = $GLOBALS["bdd"]->prepare("SELECT cOUNT(`id_place`) As `hcount` FROM `reserver` WHERE `id_place` = ?");
+function getCountHistData($id){
+    $histcount = $GLOBALS["bdd"]->prepare("SELECT COUNT(`id_place`) As `hcount` FROM `reserver` WHERE `id_place` = ?");
     $histcount->execute(array($id));
     $hc=$histcount->fetch();
     return $hc["hcount"];

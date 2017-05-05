@@ -27,7 +27,6 @@ include("controller/reserver.ctrl.php");
 					</tr>
 					<?php
 					$d = getHistoriqueMembre($user["id"]);
-					var_dump($d);
 					foreach($d as $donnee) 
 					{
 							$debut = strtotime($donnee['date_debut_periode']);

@@ -136,8 +136,9 @@ function affichePlace($mail){
 function getMembresAdmins(){
 	$admins = selectAdmins();
 	$i=0;
+	$membres = array();
 	while($data = $admins->fetch()){
-		$membres = array($i => array(
+		$membres[$i] = array(
 			"id_membre" => $data["id_membre"], 
     		"mail_membre" => $data["mail_membre"],
     		"civilite_membre" =>$data["civilite_membre"],
@@ -149,7 +150,7 @@ function getMembresAdmins(){
     		"adVille_membre" => $data["adVille_membre"],
     		"rang" => $data["rang"],
     		"valide_membre" => $data["valide_membre"]
-    	));
+    	);
 		$i++;
     }
     return $membres;
