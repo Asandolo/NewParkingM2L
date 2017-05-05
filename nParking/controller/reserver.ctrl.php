@@ -6,7 +6,7 @@ function getHistoriqueMembre($id){
 	$i = 0;
 	$historique = array();
 	while($data = $h->fetch()){
-		$historique = array($i => array(
+		$historique = array([$i] => array(
 			"date_debut_periode" => $data["date_debut_periode"],
 			"date_fin_periode" => $data["date_fin_periode"],
 			"num_place" => $data["num_place"]
