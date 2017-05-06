@@ -72,6 +72,21 @@ function selectNotValideMembre(){
 }
 
 
+function selectValideMembre(){
+	$Valid = $GLOBALS["bdd"]->query("SELECT * FROM `membre` WHERE `valide_membre` = 1");
+	return $Valid;
+}
+
+
+function selectHistMembre($id){
+	$histcount = $GLOBALS["bdd"]->prepare("SELECT COUNT(`id_membre`) As `hcount` FROM `reserver` WHERE `id_membre` = ?");
+	$histcount->execute(array($id));
+	$hc = $histcount->fetch();
+	return $hc["hcount"];
+}
+
+
+
 function updateNonAdmin($id){
 	$deladm = $GLOBALS["bdd"]->prepare("UPDATE `membre` SET `admin_membre` = 0 WHERE `id_membre` = ?");
 	$deladm->execute(array($id));

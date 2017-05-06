@@ -39,7 +39,7 @@ function getNotValideMembre(){
 	$i=0;
 	while($data = $notVal->fetch()){
 		$notValide[$i] = array(
-    		"id" => $data["id_membre"], 
+    		"id_membre" => $data["id_membre"], 
     		"mail_membre" => $data["mail_membre"],
     		"civilite_membre" =>$data["civilite_membre"],
     		"nom_membre" => $data["nom_membre"],
@@ -55,6 +55,33 @@ function getNotValideMembre(){
 		$i++; 
 	}
 	return $notValide;
+}
+
+function getValideMembre(){
+	$Valide = selectValideMembre();
+	$cValide = $Valide->rowCount();
+	if($cValide == 0)
+		return null;
+	$Valides = array();
+	$i=0;
+	while($data = $Valide->fetch()){
+		$Valides[$i] = array(
+    		"id_membre" => $data["id_membre"], 
+    		"mail_membre" => $data["mail_membre"],
+    		"civilite_membre" =>$data["civilite_membre"],
+    		"nom_membre" => $data["nom_membre"],
+    		"prenom_membre" => $data["prenom_membre"],
+    		"date_naiss_membre" => $data["date_naiss_membre"],
+    		"adRue_membre" => $data["adRue_membre"],
+    		"adCP_membre" => $data["adCP_membre"],
+    		"adVille_membre" => $data["adVille_membre"],
+    		"rang" => $data["rang"],
+    		"valide_membre" => $data["valide_membre"],
+    		"admin_membre" => $data["admin_membre"]
+		);
+		$i++; 
+	}
+	return $Valides;
 }
 
 // HASH Du MOT DE PASS
@@ -184,6 +211,12 @@ function getMembresAdmins(){
     return $membres;
 }
 
+
+function getHistMembre($id){
+	return selectHistMembre($id);
+}
+
+
 function setNonAdmin($id){
 	updateNonAdmin($id);
 }
@@ -193,11 +226,11 @@ function setAdmin($id){
 }
 
 function setNonValide($id){
-	updateNonAdmin($id);
+	updateNonValide($id);
 }
 
 function setValide($id){
-	updateAdmin($id);
+	updateValide($id);
 }
 
 function setDeleteMembre($id){

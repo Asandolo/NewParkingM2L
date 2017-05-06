@@ -8,25 +8,24 @@ if ($_SESSION["adm"]!=1) {
 }
 
 if (isset($_POST["degrade"])) {
-	setNonAdmin($user["id"]);
+	setNonAdmin($_POST["id"]);
 }
 
 if (isset($_POST["admin"])) {
-	setAdmin($user["id"]);
+	setAdmin($_POST["id"]);
 }
 
 if (isset($_POST["deac"])) {
 	
-	setNonValide($user["id"]);
+	setNonValide($_POST["id"]);
 }
 
 if (isset($_POST["activate"])) {
-	
-	setValide($user["id"]);
+	setValide($_POST["id"]);
 }
 
 if (isset($_POST["sup"]) || isset($_POST["refu"])) {
-	setDeleteMembre($id);
+	setDeleteMembre($_POST["id"]);
 }
 ?>
 <div class="row">
@@ -100,33 +99,26 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 					<th>Nom</th>
 					<th>Prenom</th>
 					<th>Actions</th>
+					<th>Valde</th>
+					<th>Admin</th>
 				</tr>
 				<?php
 				$nonverifs = getNotValideMembre();
-				if ($nonverifs == null) {
+				if ($nonverifs == null) {	
 					?>
 					<td colspan="12">Il n'y as pas de membre dans cette section</td>
 					<?php
 				}else{
-					while ($nonverif=$nonverifs->fetch()) {
-						$ajd = date("Y-m-d"); 
-						$tsajd = strtotime($ajd);
-						$placesnonverif = $bdd->prepare("SELECT * FROM `reserver`, `place` WHERE `id_membre` = ? AND date_debut_periode <= ? AND date_fin_periode >= ? AND `reserver`.`id_place` = `place`.`id_place`");
-						$placesnonverif->execute(array($nonverif["id_membre"],$ajd,$ajd));
-						$placenonverif = $placesnonverif->fetch();
-						$countnonverif = $placesnonverif->rowCount();
+					foreach($nonverifs as $nonverif){
+						$placesnonverif = getReserver($nonverif["id_membre"]);
 						?>
 						<tr>
 							<td><?php echo $nonverif["id_membre"]; ?></td>
 							<td><?php echo $nonverif["civilite_membre"]; ?></td>
 							<td><?php echo $nonverif["nom_membre"]; ?></td>
 							<td><?php echo $nonverif["prenom_membre"]; ?></td>
-							<td><?php echo date("d/m/Y", strtotime($nonverif["date_naiss_membre"])); ?></td>
-							<td><?php echo $nonverif["adRue_membre"]; ?></td>
-							<td><?php echo $nonverif["adCP_membre"]; ?></td>
-							<td><?php echo $nonverif["adVille_membre"]; ?></td>
 							<td><?php 
-								if ($countnonverif<=0 && $nonverif["rang"]<=0) {
+								if ($placesnonverif["num_place"] == null && $nonverif["rang"]<=0) {
 									echo "/";
 								}elseif($nonverif["rang"]<=0){
 									echo "Place :".$placenonverif["num_place"];
@@ -168,23 +160,15 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 					<th>Actions</th>
 				</tr>
 				<?php
-				$verifs = $bdd->query("SELECT * FROM `membre` WHERE `valide_membre` = 1;");
-				$cverifs=$verifs->rowCount();
-				if ($cverifs == 0) {
+				$verifs = getValideMembre();
+				if ($verifs == null) {
 					?>
 					<td colspan="12">Il n'y as pas de membre dans cette section</td>
 					<?php
 				}else{
-					while ($verif=$verifs->fetch()) {
-						$histcount = $bdd->prepare("SELECT cOUNT(`id_membre`) As `hcount` FROM `reserver` WHERE `id_membre` = ?");
-						$histcount->execute(array($verif["id_membre"]));
-						$hc=$histcount->fetch();
-						$ajd = date("Y-m-d"); 
-						$tsajd = strtotime($ajd);
-						$placesverif = $bdd->prepare("SELECT * FROM `reserver`, `place` WHERE `id_membre` = ? AND date_debut_periode <= ? AND date_fin_periode >= ? AND `reserver`.`id_place` = `place`.`id_place`");
-						$placesverif->execute(array($verif["id_membre"],$ajd,$ajd));
-						$placeverif = $placesverif->fetch();
-						$countverif = $placesverif->rowCount();
+					foreach($verifs as $verif){
+						$histcount = getHistMembre($verif["id_membre"]);
+						$placesverif = getReserver($verif["id_membre"]);
 						?>
 						<tr>
 							<td><?php echo $verif["id_membre"]; ?></td>
@@ -192,10 +176,10 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<td><?php echo $verif["nom_membre"]; ?></td>
 							<td><?php echo $verif["prenom_membre"]; ?></td>
 							<td><?php 
-								if ($countverif<=0 && $verif["rang"]<=0) {
+								if ($verif["id_membre"] == null && $verif["rang"]<=0) {
 									echo "/";
 								}elseif($verif["rang"]<=0){
-									echo "Place :".$placeverif["num_place"];
+									echo "Place :".$placesverif["num_place"];
 								}else{
 									echo "Rang : ".$verif["rang"];
 								}
@@ -216,7 +200,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 									<input type="submit" name="sup" class="btn btn-danger" value="Supprimé" <?php echo ($verif["admin_membre"] == 1)?"disabled=''":"" ?>>
 								</form>
 								<a href="modif_admin.php?id=<?php echo $verif["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
-								<a href="historique_admin.php?user=<?php echo $verif['id_membre']; ?>"><button class="btn btn-info" <?php echo($hc["hcount"]<1)?"disabled=''":""; ?>>Historique place</button></a>
+								<a href="historique_admin.php?user=<?php echo $verif['id_membre']; ?>"><button class="btn btn-info" <?php echo($histcount<1)?"disabled=''":""; ?>>Historique place</button></a>
 							</td>
 						</tr>
 						<?php
