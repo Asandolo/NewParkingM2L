@@ -31,7 +31,7 @@ function getPlacesOfPage($prems,$total){
     $affichPlace = array();
     $i=0;
     while($data = $place->fetch()){
-        $affichPlace [$i] = array($data["id_place"], $data["num_place"]);
+        $affichPlace [$i] = array($data["id_place"], $data["num_place"], $data["active_place"]);
     }
     return $affichPlace;
 }

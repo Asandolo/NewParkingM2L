@@ -40,7 +40,7 @@ if (isset($_POST["add"])) {
             $totalpage=ceil(getNbPlace()/$nbplaceparpage);
 
 
-            $pagea = 1;
+            //$pagea = 1;
             if (!isset($_GET["p"])) {
                 header('Location: place_admin.php?p=1');
             }elseif ($_GET["p"]<1) {
@@ -48,10 +48,21 @@ if (isset($_POST["add"])) {
             }else{
                 $pagea = $_GET["p"];
             }
+
             $prems = ($pagea-1)*$nbplaceparpage;
+
+            echo "<pre>";
+            print_r($prems);
+            echo "</pre>";
+            echo "<pre>";
+            print_r($nbplaceparpage);
+            echo "</pre>";
 
             $places = getPlacesOfPage($prems,$nbplaceparpage);
 
+            echo "<pre>";
+            print_r($places);
+            echo "</pre>";
             ?>
 
             <ul class="pagination">
@@ -66,10 +77,9 @@ if (isset($_POST["add"])) {
                     <th>#</th><th>Numero</th><th>Actions</th><th>Historique</th>
                 </tr>
                 <?php
-                foreach ($places as $place=>$pl) {
+                foreach ($places as $place) {
 
-                    var_dump($place);
-                    var_dump($pl);
+
 
                     ?>
                     <tr>
