@@ -79,7 +79,7 @@ if (isset($_POST["add"])) {
                                 <?php echo ($place["active_place"]==1)?"<input type='submit' name='desac' value='Desactiver' class='btn btn-warning'>":"<input type='submit' name='ac' value='Activer' class='btn btn-success'>";?>
                             </form>
                         </td>
-                        <!-- <td> <a href="Historique_admin.php?place=<?php //echo $place["id_place"]; ?>"><button <?php//echo($hc["hcount"]<1)?"disabled=''":""; ?> class="btn btn-info">Historique de  la place</button></a></td> -->
+                        <td> <a href="historique_admin.php?place=<?php echo $place["id_place"]; ?>"><button <?php echo(getCountHistData($place["id_place"])<1)?"disabled=''":""; ?> class="btn btn-info">Historique de  la place</button></a></td>
                     </tr>
                     <?php
                 }
