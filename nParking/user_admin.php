@@ -3,9 +3,9 @@ $titre = "Utilisateurs Admin";
 include("includes/pages/header.php");
 include("controller/reserver.ctrl.php");
 
-//if ($user["admin_membre"] >0) {
-//	header('Location: index.php');
-//}
+if ($_SESSION["adm"]!=1) {
+    header('Location: index.php');
+}
 
 if (isset($_POST["degrade"])) {
 	setNonAdmin($user["id"]);

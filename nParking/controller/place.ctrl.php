@@ -26,9 +26,6 @@ function getNbPlace(){
     return getNbPlaceData();
 }
 
-
-//// A FAIRE
-
 function getPlacesOfPage($prems,$total){
     $place = getPlacesOfPageData($prems,$total);
     $affichPlace = array();

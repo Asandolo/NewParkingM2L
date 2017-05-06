@@ -16,6 +16,7 @@ if(isset($_POST["conect"]))
     {
       $_SESSION["mail"] = $mail;
       $_SESSION["id"] = getIdByMail($mail);
+      $_SESSION["adm"] = getAdmByMailData($mail);
       header('Location: index.php');
     }
     else

@@ -129,6 +129,7 @@ function affichePlace($mail){
 
 
 
+
 //////////////////////////////////////////////////////////
 ///////////// REQUETTES ADMINISTRATEUR ///////////////////
 //////////////////////////////////////////////////////////
@@ -174,5 +175,13 @@ function setValide($id){
 
 function setDeleteMembre($id){
 	deleteMembre($id);
+}
+
+function getIdByMail($mail){
+    getIdByMailData($mail);
+}
+
+function getAdmByMail($mail){
+    return getAdmByMailData($mail);
 }
 ?>

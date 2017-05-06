@@ -43,7 +43,7 @@ function deAcPlaceData($id){
 function getNbPlaceData(){
     $cplace = $GLOBALS["bdd"]->query("SELECT COUNT(*) as `total` FROM `place`");
     $count=$cplace->fetch();
-    return ceil($count["total"]);
+    return $count["total"];
 }
 
 function getPlacesOfPageData($prems,$total){
