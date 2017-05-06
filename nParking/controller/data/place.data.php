@@ -47,8 +47,7 @@ function getNbPlaceData(){
 }
 
 function getPlacesOfPageData($prems,$total){
-    $splace=$GLOBALS["bdd"]->prepare("SELECT * FROM `place` ORDER BY `num_place` LIMIT ?,?");
-    $splace->execute(array($prems,$total));
+    $splace=$GLOBALS["bdd"]->query("SELECT * FROM `place` ORDER BY `num_place` LIMIT ".$prems.",".$total."");
     return $splace;
 }
 
