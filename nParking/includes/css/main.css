@@ -1,0 +1,46 @@
+ body {
+    background-image: url('../imgs/color-splash.jpg');
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+
+.info {
+  font-size: 20px;
+  text-align: center;
+}
+
+.black {
+  background-color: rgba(0,0,0,0.6);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+}
