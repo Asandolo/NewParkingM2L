@@ -30,6 +30,14 @@ function isValidMembre($mail){
 	
 }
 
+function verifNewMdp($mail, $oldpsw){
+	$old = getMdpMembreData($mail);
+	if($old == hashMdp($oldpsw))
+		return true;
+	else
+		return false;
+}
+
 function getNotValideMembre(){
 	$notVal = selectNotValideMembre();
 	$cnotVal = $notVal->rowCount();
@@ -94,22 +102,7 @@ function hashMdp($psw) {
 }
 
 
-function verifNewMdp($mail, $mdp){
-	$psw = getMdpMembreData($mail);
-	$oldMdp = $psw->fetch();
-	$mdp = hashMdp($mdp);
-	if($oldMdp["psw_membre"] == $mdp){
-		return true;
-	}
-	return false;
 
-}
-
-
-function setNewMdp($mail,$psw){
-	$psw = hashMdp($psw);
-	updateMdp($mail,$psw);
-}
 
 function setProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville){
 	updateProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville);
@@ -152,6 +145,25 @@ function getMembre($mail){
     return $membre;
 }
 
+
+function getMembreById($id){
+	$i = getInfoConnectById($id);
+    $data = $i->fetch();
+    $membre = array(
+    	"id" => $data["id_membre"], 
+    	"mail_membre" => $data["mail_membre"],
+    	"civilite_membre" =>$data["civilite_membre"],
+    	"nom_membre" => $data["nom_membre"],
+    	"prenom_membre" => $data["prenom_membre"],
+    	"date_naiss_membre" => $data["date_naiss_membre"],
+    	"adRue_membre" => $data["adRue_membre"],
+    	"adCP_membre" => $data["adCP_membre"],
+    	"adVille_membre" => $data["adVille_membre"],
+    	"rang" => $data["rang"],
+    	"valide_membre" => $data["valide_membre"],
+    	"admin_membre" => $data["admin_membre"]);
+    return $membre;
+}
 
 
 function affichePlace($mail){
@@ -243,5 +255,23 @@ function getIdByMail($mail){
 
 function getAdmByMail($mail){
     return getAdmByMailData($mail);
+}
+
+function stringRand($car) {
+$string = "";
+$chaine = "abcdefghijklmnpqrstuvwxy1234567890";
+srand((double)microtime()*1000000);
+for($i=0; $i<$car; $i++) {
+$string .= $chaine[rand()%strlen($chaine)];
+}
+return $string;
+}
+
+
+function setNewRandMdp($id){
+	$psw = stringRand(10);
+	$hashpsw = hashMdp($psw);
+	updateMdp($id,$hashpsw);
+	return $psw;
 }
 ?>

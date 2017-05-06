@@ -7,6 +7,14 @@ function getInfoConnect($mail){
     return $info;
 }
 
+
+function getInfoConnectById($id){
+    $info = $GLOBALS["bdd"]->prepare("SELECT * FROM membre WHERE id_membre = ?");
+    $info->execute(array($id));
+    return $info;
+}
+
+
 function MailExiste($mail){
 	$verif=$GLOBALS["bdd"]->prepare("SELECT mail_membre AS  FROM membre WHERE mail_membre=?");
   	$verif->execute(array($mail));
@@ -39,9 +47,9 @@ function getMdpMembreData($mail){
 }
 
 
-function updateMdp($mail,$psw){
-	$updatepsw = $GLOBALS["bdd"]->prepare("UPDATE membre SET psw_membre = ? WHERE mail_membre = ?");
-	$updatepsw->execute(array($psw,$mail));
+function updateMdp($id,$psw){
+	$updatepsw = $GLOBALS["bdd"]->prepare("UPDATE membre SET psw_membre = ? WHERE id_membre = ?");
+	$updatepsw->execute(array($psw,$id));
 }
 
 function updateProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville){
