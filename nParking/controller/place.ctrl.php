@@ -45,4 +45,26 @@ function haveBeenReserve($id){
     return true;
 }
 
+function getHistoriquePlace($id){
+    $s = selectPLaceHist($id);
+    $array = array();
+    $i=0;
+    while ($d=$s->fetch()){
+        $array[$i] = array(
+            "num_place" => $d["num_place"],
+            "nom_membre" => $d["nom_membre"],
+            "prenom_membre" => $d["prenom_membre"],
+            "date_fin_periode" => $d["date_fin_periode"],
+            "date_debut_periode" => $d["date_debut_periode"],
+            "active_place" => $d["active_place"]
+        );
+        $i++;
+    }
+    return $array;
+}
+
+function getCHPlace($id){
+    return selectCPLaceHist($id);
+}
+
 ?>

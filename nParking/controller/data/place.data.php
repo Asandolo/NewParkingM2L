@@ -58,4 +58,17 @@ function getCountHistData($id){
     return $hc["hcount"];
 }
 
+function selectPLaceHist($id){
+    $histplaces = $GLOBALS["bdd"]->prepare("SELECT * FROM `reserver` AS `r`, `membre` as `m`, `place` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_place` = ?;");
+    $histplaces->execute(array($id));
+    return $histplaces;
+}
+
+function selectCPLaceHist($id){
+    $histplaces = $GLOBALS["bdd"]->prepare("SELECT COUNT(*) As c FROM `reserver` AS `r`, `membre` as `m`, `place` As `p` WHERE `r`.`id_membre` = `m`.`id_membre` AND `p`.`id_place` = `r`.`id_place` AND `r`.`id_place` = ?;");
+    $histplaces->execute(array($id));
+    $d = $histplaces->fetch();
+    return $d["c"];
+}
+
 ?>
