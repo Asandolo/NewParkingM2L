@@ -8,7 +8,7 @@
 				<div class="panel panel-heading">Réservation d'une place</div>
 				<div class="panel-body">
 					<p>
-						Pour réservé une place
+						Pour réserver une place
 						<ul> 
 							<li> il ne faut pas avoir de place en cours d'utilisation</li>
 							<li> il ne faut pas avoir de rang dans la fils d'atente</li>

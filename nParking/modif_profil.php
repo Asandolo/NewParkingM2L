@@ -86,7 +86,7 @@ if (isset($_POST["updateprofil"])) {
 					</select>
 					<select style="color: black;" name="mois">
 						<?php
-						for ($i=1;$i<=31;$i++) {
+						for ($i=1;$i<=12;$i++) {
 							?>
 							<option <?php echo ($datenaiss[1]==$i)?"selected=''":""; ?>>
 								<?php

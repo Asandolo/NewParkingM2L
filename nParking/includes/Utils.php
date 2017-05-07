@@ -41,7 +41,7 @@ function getMois($date){
             return "avril ";
             break;
         case 5:
-            return"mais ";
+            return"mai ";
             break;
         case 6:
             return "juin ";
