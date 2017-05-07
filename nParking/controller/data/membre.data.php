@@ -27,9 +27,9 @@ function createMembreData($mail,$hashpsw,$civilite,$nom,$prenom,$date_naiss,$rue
 }
 
 function getIdByMailData($mail){
-    $r = $GLOBALS["bdd"]->prepare("SELECT id_membre FROM membre WHERE mail_membre = ?");
+    $r = $GLOBALS["bdd"]->prepare("SELECT id_membre As id FROM membre WHERE mail_membre = ?");
     $r->execute(array($mail));
-    $d = $r ->fetch();
+    $d = $r->fetch();
     return $d["id"];
 }
 

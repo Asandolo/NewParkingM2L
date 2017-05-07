@@ -15,7 +15,7 @@ reserver($_SESSION["id"]);
 
 ?>
 <div class="row">
-    <?php echo "DEBUG : ".$user["rang"]; ?>
+    <?php echo "DEBUG : ".$_SESSION["id"]; ?>
     <div class="col-md-12 black">
         <p>Merci de votre réservation !</p>
         <a href="index.php">Retour</a>
