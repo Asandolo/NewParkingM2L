@@ -28,6 +28,7 @@ function getReserver($id){
 }
 
 function reserver($idm){
+    echo "ID : ".$idm;
     $c = getcountPd();
     if ($c>0){
         $places = getPlaceDispo();
