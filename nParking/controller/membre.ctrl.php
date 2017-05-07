@@ -1,6 +1,7 @@
 <?php
 
 include ("data/membre.data.php");
+include ('includes/Utils.php');
 //include ("controller/place.ctrl.php");
 
 
@@ -195,9 +196,22 @@ function affichePlace($mail){
 		$affiche .= "</br><form><a class='btn btn-danger' value='Reserver une place' href='reservation.php' />Reserver une place</a></form>";
 	}elseif($user["rang"]<=0){
 		if($place["date_fin_periode"]>=$ajd){
-			if($place["date_debut_periode"]<=$ajd){ 	
+			if($place["date_debut_periode"]<=$ajd){
+
+
+			    $njour = getJours($place["date_fin_periode"]);
+			    $ijour = date('d',strtotime($place["date_fin_periode"]));
+			    $mois = getMois($place["date_fin_periode"]);
+			    $anne = date('Y',strtotime($place["date_fin_periode"]));
+			    $d = $njour." ".$ijour." ".$mois." ".$anne;
+			    $d = $njour." ".$ijour." ".$mois." ".$anne;
+			    $d = $njour." ".$ijour." ".$mois." ".$anne;
+			    $d = $njour." ".$ijour." ".$mois." ".$anne;
+
+
+
 				$affiche = "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
-				$affiche .= "<p style='font-size:20px'>Jusqu'au: <br /><strong>".$place["date_fin_periode"]."</strong></p>";
+				$affiche .= "<p style='font-size:20px'>Jusqu'au: <br /><strong>".$d."</strong></p>";
 			}
 			else{
 				$deb_resa_fr=date("d/m/Y", strtotime($place['date_debut_periode'])) ;
