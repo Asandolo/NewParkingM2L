@@ -34,10 +34,6 @@ function reserver($idm){
         $place = $places[0];
         reserverPlace($idm,$place["id_place"]);
 
-    }else{
-        $r = getMaxRang();
-        $r++;
-        reserverPlace($idm,$r);
     }
 }
 

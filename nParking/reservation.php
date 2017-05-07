@@ -14,7 +14,7 @@ if(isset($_POST["OUI"])){
 	header('Location: index.php');
 }
 
-if(reserver($_SESSION["id"]) == null){
+if(getcountPd()==0){
 	?>
 	<div class="row">
     <div class="col-md-12 black">
@@ -28,6 +28,7 @@ if(reserver($_SESSION["id"]) == null){
 	<?php
 }
 else{
+    reserver($_SESSION["id"]);
 ?>
 <div class="row">
     <div class="col-md-12 black">
