@@ -52,6 +52,11 @@ function updateMdp($id,$psw){
 	$updatepsw->execute(array($psw,$id));
 }
 
+function updateMdpByMail($mail,$psw){
+	$updatepsw = $GLOBALS["bdd"]->prepare("UPDATE membre SET psw_membre = ? WHERE mail_membre = ?");
+	$updatepsw->execute(array($psw,$mail));	
+}
+
 function updateProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville){
 	$update = $GLOBALS["bdd"]->prepare("
 		UPDATE membre 
@@ -60,6 +65,13 @@ function updateProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville){
 	$update->execute(array($civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville,$id));
 }
 
+
+function countMailMembreData($mail){
+	$count = =$GLOBALS["bdd"]->prepare("SELECT COUNT(id_membre) as cMail FROM membre WHERE mail_membre = ?");
+	$count->execute(array($mail));
+	$c = $count->fetch();
+	return $c;
+}
 
 
 //////////////////////////////////////////////////////////

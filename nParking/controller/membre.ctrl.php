@@ -30,13 +30,22 @@ function isValidMembre($mail){
 	
 }
 
-function verifNewMdp($mail, $oldpsw){
-	$old = getMdpMembreData($mail);
-	if($old == hashMdp($oldpsw))
-		return true;
-	else
-		return false;
+
+function countMailMembre($mail){
+	return countMailMembreData($mail);
 }
+
+
+function verifNewMdp($mail, $oldpsw){
+	$o = getMdpMembreData($mail);
+	$old = $o->fetch();
+	if($old[0] == hashMdp($oldpsw)){
+		return true;
+	}
+	return false;
+}
+
+
 
 function getNotValideMembre(){
 	$notVal = selectNotValideMembre();
@@ -106,6 +115,15 @@ function hashMdp($psw) {
 
 function setProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville){
 	updateProfil($id,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville);
+}
+
+
+function setNewMdpByMail($mail,$psw){
+	updateMdpByMail($mail,hashMdp($psw));
+}
+
+function setNewMdp($id,$psw){
+	updateMdp($id,$psw);
 }
 
 //VERIFIE SI L'EMAIL EXISTE DÉJA

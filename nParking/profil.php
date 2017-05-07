@@ -9,10 +9,10 @@ if (isset($_POST["repsw"])) {
 	$oldpsw = htmlspecialchars($_POST["oldpsw"]);
 	$newpsw = htmlspecialchars($_POST["newpsw"]);
 	$cknewpsw = htmlspecialchars($_POST["cknewpsw"]);
-	
-	if (verifNewMdp($_SESSION["mail"], $oldpsw)) {
+	$check = verifNewMdp($_SESSION["mail"], $oldpsw);
+	if ($check) {
 		if ($newpsw==$cknewpsw) {
-			setNewMdp($_SESSION["mail"],$newpsw);
+			setNewMdpByMail($_SESSION["mail"],$newpsw);
 		}else{
 			$error = "Les mots de pass sont différent";
 		}

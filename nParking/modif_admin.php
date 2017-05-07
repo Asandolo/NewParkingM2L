@@ -120,7 +120,7 @@ if (isset($_POST["updateprofil"])) {
 			</table>
 			<input type="submit" name="updateprofil" class="btn btn-success">
 		</form>
-		<a href="modifmdp.php?id=<?php echo $data['id_membre']; ?>" target="_BLANC" ><button class="btn btn-danger">Modifier mot de passe</button></a>
+		<a href="modifmdp.php?id=<?php echo $_GET["id"]; ?>" target="_BLANC" ><button class="btn btn-danger">Modifier mot de passe</button></a>
 	</div>
 </div>
 
