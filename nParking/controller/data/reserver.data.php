@@ -41,11 +41,11 @@ function reserverPlace($idm,$idp){
 
 function reserverRang($idm,$rang){
     $u = $GLOBALS["bdd"]->prepare("UPDATE membre SET rang = ? WHERE id_membre = ?");
-    $u->execute($rang,$idm);
+    $u->execute(array($rang,$idm));
 }
 
 function getMaxRang(){
-    $s = $GLOBALS["bdd"]->query("SELECT MAX(rang) as m FROM membre");
+    $s = $GLOBALS["bdd"]->query("SELECT MAX(rang) as d FROM membre");
     $d=$s->fetch();
     return $d["d"];
 }
