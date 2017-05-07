@@ -70,7 +70,7 @@ function countMailMembreData($mail){
 	$count = $GLOBALS["bdd"]->prepare("SELECT COUNT(id_membre) as cMail FROM membre WHERE mail_membre = ?");
 	$count->execute(array($mail));
 	$c = $count->fetch();
-	return $c;
+	return $c["cMail"];
 }
 
 
