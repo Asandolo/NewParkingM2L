@@ -16,7 +16,7 @@ function getInfoConnectById($id){
 
 
 function MailExiste($mail){
-	$verif=$GLOBALS["bdd"]->prepare("SELECT mail_membre AS  FROM membre WHERE mail_membre=?");
+	$verif=$GLOBALS["bdd"]->prepare("SELECT  mail_membre FROM membre WHERE mail_membre=?");
   	$verif->execute(array($mail));
   	return $verif;
 }
@@ -27,7 +27,7 @@ function createMembreData($mail,$hashpsw,$civilite,$nom,$prenom,$date_naiss,$rue
 }
 
 function getIdByMailData($mail){
-    $r = $GLOBALS["bdd"]->prepare("SELECT id FROM membre WHERE mail_membre = ?");
+    $r = $GLOBALS["bdd"]->prepare("SELECT id_membre FROM membre WHERE mail_membre = ?");
     $r->execute(array($mail));
     $d = $r ->fetch();
     return $d["id"];

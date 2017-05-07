@@ -14,3 +14,38 @@ function placeActuelMembre($id){
 	$places->execute(array($id,$aujourdhui));
 	return $places;
 }
+
+function selectPlaceDispo(){
+    $week = date("U")+7*24*60*60;
+    $w = date("Y-m-d",$week);
+    $select = $GLOBALS["bdd"]->prepare("SELECT * FROM place WHERE active_place = 1 AND id_place NOT IN (SELECT reserver.id_place FROM reserver WHERE date_fin_periode <= ? AND date_debut_periode<NOW())");
+    $select->execute(array($w));
+    return $select;
+}
+
+function countPd(){
+    $week = date("U")+7*24*60*60;
+    $w = date("Y-m-d",$week);
+    $select = $GLOBALS["bdd"]->prepare("SELECT COUNT(*) As c FROM place WHERE active_place = 1 AND id_place NOT IN (SELECT reserver.id_place FROM reserver WHERE date_fin_periode <= ? AND date_debut_periode<NOW())");
+    $select->execute(array($w));
+    $d=$select->fetch();
+    return $d["c"];
+}
+
+function reserverPlace($idm,$idp){
+    $week = date("U")+7*24*60*60;
+    $w = date("Y-m-d",$week);
+    $i = $GLOBALS["bdd"]->prepare("INSERT INTO reserver (date_fin_periode, id_membre, id_place, date_debut_periode) VALUES(?,?,?,NOW())");
+    $i->execute(array($w,$idm,$idp));
+}
+
+function reserverRang($idm,$rang){
+    $u = $GLOBALS["bdd"]->prepare("UPDATE membre SET rang = ? WHERE id_membre = ?");
+    $u->execute($rang,$idm);
+}
+
+function getMaxRang(){
+    $s = $GLOBALS["bdd"]->query("SELECT MAX(rang) as m FROM membre");
+    $d=$s->fetch();
+    return $d["d"];
+}

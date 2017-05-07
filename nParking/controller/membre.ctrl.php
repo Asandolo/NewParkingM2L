@@ -192,11 +192,12 @@ function affichePlace($mail){
 	$place = getReserver($user["id"]);
 	if (getPlaceMembre($user["id"])==null && $user["rang"]<=0) {
 		$affiche = "<p style='font-size:20px'>Vous n'avez aucune place et n'etes pas dans la file d'atente</p>";
-		$affiche .= "</br><form><a class='btn btn-danger' value='Reserver une place' href='place_dispo.php' />Reserver une place</a></form>";
+		$affiche .= "</br><form><a class='btn btn-danger' value='Reserver une place' href='reservation.php' />Reserver une place</a></form>";
 	}elseif($user["rang"]<=0){
 		if($place["date_fin_periode"]>=$ajd){
 			if($place["date_debut_periode"]<=$ajd){ 	
 				$affiche = "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
+				$affiche .= "<p style='font-size:20px'>Jusqu'au: <br /><strong>".$place["date_fin_periode"]."</strong></p>";
 			}
 			else{
 				$deb_resa_fr=date("d/m/Y", strtotime($place['date_debut_periode'])) ;
@@ -206,7 +207,6 @@ function affichePlace($mail){
 		}
 	}else{
 		$affiche = "<p style='font-size:20px'>Vous avez le rang : <br /><strong>".$user["rang"]."</strong></p>";
-		$affiche .= "</br><form><a class='btn btn-danger' value='Reserver une place' href='place_dispo.php' />Reserver une place</a></form>";
 	}
 	return $affiche;
 }
@@ -268,7 +268,7 @@ function setDeleteMembre($id){
 }
 
 function getIdByMail($mail){
-    getIdByMailData($mail);
+    return getIdByMailData($mail);
 }
 
 function getAdmByMail($mail){

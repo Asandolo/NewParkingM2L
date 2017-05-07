@@ -26,4 +26,41 @@ function getReserver($id){
 	);
 	return $arPlace;
 }
+
+function reserver($idm){
+    echo 'ook';
+    $c = getcountPd();
+    if ($c>0){
+        echo "<br>ok<br>";
+        $places = getPlaceDispo();
+        $place = $places[0];
+        echo "+".$idm;
+        echo "<br>".$place["id_place"];
+        reserverPlace($idm,$place["id_place"]);
+    }else{ 
+        $r = getMaxRang();
+        $r++;
+        reserverRang($idm,$r);
+    }
+}
+
+
+function getcountPd(){
+ return countPd();
+}
+
+
+function getplaceDispo(){
+    $s = selectPlaceDispo();
+    $array = array();
+    $i=0;
+    while ($d=$s->fetch()){
+        $array[$i] = array(
+            "id_place" => $d["id_place"],
+            "num_place" => $d["num_place"]
+        );
+        $i++;
+    }
+    return $array;
+}
 ?>
