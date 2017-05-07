@@ -28,14 +28,10 @@ function getReserver($id){
 }
 
 function reserver($idm){
-    echo 'ook';
     $c = getcountPd();
     if ($c>0){
-        echo "<br>ok<br>";
         $places = getPlaceDispo();
         $place = $places[0];
-        echo "+".$idm;
-        echo "<br>".$place["id_place"];
         reserverPlace($idm,$place["id_place"]);
     }else{ 
         $r = getMaxRang();
