@@ -35,7 +35,7 @@ if(isset($_POST['enregistrer']))
   else
   {
   	createMembre($mail,$psw,$civilite,$nom,$prenom,$date_naiss,$rue,$cp,$ville);
-  	$ok = "Vos informations on bien été enreistrés vous pourez vous connecter quand votre compte aura été valider par un administrateur";
+  	$ok = "Vos informations on bien été enreistrés vous pourez vous connecter quand votre compte aura été validé par un administrateur";
   }
 }  
 ?>

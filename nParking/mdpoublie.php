@@ -38,7 +38,7 @@ if (isset($_POST["mdp"])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LOGIN</title>
+    <title>Mot de passe oublier</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="includes/css/login.css">
