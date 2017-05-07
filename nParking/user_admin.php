@@ -49,7 +49,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 
 				if ($cadmins == 0) {
 					?>
-					<td colspan="12">Il n'y as pas de membre dans cette section</td>
+					<td colspan="12">Il n'y a pas de membre dans cette section</td>
 					<?php
 				}else{
 					foreach($admins as $admin){
@@ -76,7 +76,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<td>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $admin["id_membre"]; ?>">
-									<input type="submit" value="Dégrader" class="btn btn-danger" name="degrade" <?php echo ($cadmins == 1 || $admin["id_membre"] == $_SESSION["id"])?"disabled=''":"" ?>>
+									<input type="submit" value="Rétrograder" class="btn btn-danger" name="degrade" <?php echo ($cadmins == 1 || $admin["id_membre"] == $_SESSION["id"])?"disabled=''":"" ?>>
 								</form>
 								<a href="modif_admin.php?id=<?php echo $admin["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
 							</td>
@@ -99,14 +99,12 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 					<th>Nom</th>
 					<th>Prenom</th>
 					<th>Actions</th>
-					<th>Valde</th>
-					<th>Admin</th>
 				</tr>
 				<?php
 				$nonverifs = getNotValideMembre();
 				if ($nonverifs == null) {	
 					?>
-					<td colspan="12">Il n'y as pas de membre dans cette section</td>
+					<td colspan="12">Il n'y a pas de membre dans cette section</td>
 					<?php
 				}else{
 					foreach($nonverifs as $nonverif){
@@ -126,8 +124,6 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 									echo "Rang : ".$nonverif["rang"];
 								}
 								?></td>
-								<td><?php echo ($nonverif["valide_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
-								<td><?php echo ($nonverif["admin_membre"] == 1)?"<span style='color:green;'>Oui</span>":"<span style='color:red;'>Non</span>"; ?></td>
 								<td>
 									<form method="POST">
 										<input type="hidden" name="id" value="<?php echo $nonverif["id_membre"]; ?>">
@@ -163,7 +159,7 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 				$verifs = getValideMembre();
 				if ($verifs == null) {
 					?>
-					<td colspan="12">Il n'y as pas de membre dans cette section</td>
+					<td colspan="12">Il n'y a pas de membre dans cette section</td>
 					<?php
 				}else{
 					foreach($verifs as $verif){
@@ -189,17 +185,17 @@ if (isset($_POST["sup"]) || isset($_POST["refu"])) {
 							<td>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $verif["id_membre"]; ?>">
-									<input type="submit" name="deac" class="btn btn-warning" value="Déactiver" <?php echo ($verif["admin_membre"] == 1 || $verif["id_membre"] == $_SESSION["id"])?"disabled=''":"" ?>>
+									<input type="submit" name="deac" class="btn btn-warning" value="Désactiver" <?php echo ($verif["admin_membre"] == 1 || $verif["id_membre"] == $_SESSION["id"])?"disabled=''":"" ?>>
 								</form>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $verif["id_membre"]; ?>">
-									<input type="submit" name="admin" class="btn btn-info" value="Gradé admin" <?php echo ($verif["admin_membre"] == 1)?"disabled=''":"" ?>>
+									<input type="submit" name="admin" class="btn btn-info" value="Grader admin" <?php echo ($verif["admin_membre"] == 1)?"disabled=''":"" ?>>
 								</form>
 								<form method="POST">
 									<input type="hidden" name="id" value="<?php echo $verif["id_membre"]; ?>">
-									<input type="submit" name="sup" class="btn btn-danger" value="Supprimé" <?php echo ($verif["admin_membre"] == 1)?"disabled=''":"" ?>>
+									<input type="submit" name="sup" class="btn btn-danger" value="Supprimer" <?php echo ($verif["admin_membre"] == 1)?"disabled=''":"" ?>>
 								</form>
-								<a href="modif_admin.php?id=<?php echo $verif["id_membre"]; ?>"><button class="btn btn-success">Mofifier</button></a>
+								<a href="modif_admin.php?id=<?php echo $verif["id_membre"]; ?>"><button class="btn btn-success">Modifier</button></a>
 								<a href="historique_admin.php?user=<?php echo $verif['id_membre']; ?>"><button class="btn btn-info" <?php echo($histcount<1)?"disabled=''":""; ?>>Historique place</button></a>
 							</td>
 						</tr>
