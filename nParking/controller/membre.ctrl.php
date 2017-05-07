@@ -204,9 +204,6 @@ function affichePlace($mail){
 			    $mois = getMois($place["date_fin_periode"]);
 			    $anne = date('Y',strtotime($place["date_fin_periode"]));
 			    $d = $njour." ".$ijour." ".$mois." ".$anne;
-			    $d = $njour." ".$ijour." ".$mois." ".$anne;
-			    $d = $njour." ".$ijour." ".$mois." ".$anne;
-			    $d = $njour." ".$ijour." ".$mois." ".$anne;
 
 
 
