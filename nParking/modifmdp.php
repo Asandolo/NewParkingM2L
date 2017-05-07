@@ -5,8 +5,8 @@ include("includes/pages/header.php");
 if (!isset($_GET["id"]) || empty($_GET["id"])) {
 	header('Location: index.php');	
 }else{
-
-	$newpass = setNewrandMdp($_GET["id"]);
+	$psw = stringRand(10);
+	setNewrandMdp($_GET["id"],$psw);
 }
 
 ?>
@@ -16,7 +16,7 @@ if (!isset($_GET["id"]) || empty($_GET["id"])) {
 		<br />
 		<br />
 		<p>suite a votre demande votre mot de passe a été regénéré<br />
-			votre noiuveau mot de passe est : <?php echo $newpass ?> <br />
+			votre noiuveau mot de passe est : <?php echo $psw ?> <br />
 			Merci de le changer au plus vite</p>
 			<br />
 			<a href="index.php">retour</a>

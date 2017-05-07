@@ -286,10 +286,8 @@ return $string;
 }
 
 
-function setNewRandMdp($id){
-	$psw = stringRand(10);
+function setNewRandMdp($id,$psw){
 	$hashpsw = hashMdp($psw);
 	updateMdp($id,$hashpsw);
-	return $psw;
 }
 ?>
