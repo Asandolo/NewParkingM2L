@@ -33,11 +33,16 @@ function reserver($idm){
         $places = getPlaceDispo();
         $place = $places[0];
         reserverPlace($idm,$place["id_place"]);
-    }else{ 
-        $r = getMaxRang();
-        $r++;
-        reserverRang($idm,$r);
+        return 0;
+    }else{
+        return null; 
     }
+}
+
+function setRang($idm){
+    $r = getMaxRang();
+    $r++;
+    reserverRang($idm,$r);
 }
 
 
