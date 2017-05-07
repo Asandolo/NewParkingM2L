@@ -39,6 +39,14 @@ function reserverPlace($idm,$idp){
     $i->execute(array($w,$idm,$idp));
 }
 
+function reserverPlacePrecise($idm,$idp,$datepre){
+    $datepre = $datepre+24*60*60;
+    $week = $datepre+7*24*60*60;
+    $w = date("Y-m-d",$week);
+    $i = $GLOBALS["bdd"]->prepare("INSERT INTO reserver (date_fin_periode, id_membre, id_place, date_debut_periode) VALUES(?,?,?,?");
+    $i->execute(array($w,$idm,$idp,$datepre));
+}
+
 function reserverRang($idm,$rang){
     $u = $GLOBALS["bdd"]->prepare("UPDATE membre SET rang = ? WHERE id_membre = ?");
     $u->execute(array($rang,$idm));
@@ -48,4 +56,10 @@ function getMaxRang(){
     $s = $GLOBALS["bdd"]->query("SELECT MAX(rang) as d FROM membre");
     $d=$s->fetch();
     return $d["d"];
+}
+
+function getProcheResaData(){
+    $resa = $GLOBALS["bdd"]->query("SELECT id_place,date_fin_periode FROM reserver WHERE date_fin_periode = (SELECT MIN(date_fin_periode) FROM reserver");
+    $r = $resa->fetch();
+    return $r;
 }
