@@ -33,9 +33,11 @@ function reserver($idm){
         $places = getPlaceDispo();
         $place = $places[0];
         reserverPlace($idm,$place["id_place"]);
-        return 0;
+
     }else{
-        return null; 
+        $r = getMaxRang();
+        $r++;
+        reserverPlace($idm,$r);
     }
 }
 
@@ -43,8 +45,13 @@ function setRang($idm){
     $r = getMaxRang();
     $r++;
     reserverRang($idm,$r);
+    $resa = getProcheResaData();
+    reserverPlacePrecise($idm,$resa["id_place"],$resa["date_fin_periode"]);
 }
 
+function getProcheResa(){
+    return getProcheResa();
+}
 
 function getcountPd(){
  return countPd();
