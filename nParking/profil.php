@@ -1,4 +1,4 @@
-<?php 
+ <?php
 
 $titre = "Profile";
 include("includes/pages/header.php");
@@ -67,8 +67,8 @@ if (isset($_POST["repsw"])) {
 		<?php echo "<center span style='color:red;'>".$error."</center>"; ?>
 		<form method="POST">
 			<div class="form-group">
-				<input class="form-control" type="password" name="oldpsw" placeholder="Ancien mot de pass" required=""><br />
-				<input class="form-control" type="password" name="newpsw" placeholder="Nouveau mot de pass" required=""><br />
+				<input class="form-control" type="password" name="oldpsw" placeholder="Ancien mot de passe" required=""><br />
+				<input class="form-control" type="password" name="newpsw" placeholder="Nouveau mot de passe" required=""><br />
 				<input class="form-control" type="password" name="cknewpsw" placeholder="Valider le nouveau mot de passe"  required=""><br />
 			</div>
 			<input type="submit" name="repsw" value="Changer le mot de passe" class="btn btn-success form-control">

@@ -11,11 +11,11 @@
 						Pour réserver une place
 						<ul> 
 							<li> il ne faut pas avoir de place en cours d'utilisation</li>
-							<li> il ne faut pas avoir de rang dans la fils d'atente</li>
+							<li> il ne faut pas avoir de rang dans la file d'atente</li>
 						</ul>
 					</p>
-					<p>Si il y a des places de libres la première vous est atribuée</p>
-					<p>Si il n'y a pas de place disponible vous êtes mis dans la fil d'attente</p>
+					<p>Si il y a des places de libres, la première vous sera atribuée</p>
+					<p>Si il n'y a pas de place disponible vous êtes mis dans la file d'attente</p>
 				</div>
 			</div>
 			<div class="panel panel-default">

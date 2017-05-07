@@ -23,7 +23,7 @@ include("controller/reserver.ctrl.php");
 						<th>NUMERO DE PLACE</th>
 						<th>DATE D'ATTRIBUTION</th>
 						<th>DATE D'EXPIRATION</th>
-						<th>Etat Actuel</th>
+						<th>Etat Actuelle</th>
 					</tr>
 					<?php
 					$d = getHistoriqueMembre($user["id"]);
