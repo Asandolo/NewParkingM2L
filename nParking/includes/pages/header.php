@@ -34,7 +34,7 @@ if ($user["valide_membre"] == 0) {
      <div class="col-sm-3">		
      </div>
      <div class="col-sm-9" style="height:100px; margin-top:10px" >
-      <p class="info"><?php echo $user["civilite_membre"]." ".strtoupper($user["nom_membre"])." ".$user["prenom_membre"]; ?></p>
+      <p class="info"><?php echo $user["civilite_membre"]." ".strtoupper($user["nom_membre"])." ".$user["prenom_membre"]." ".$_SESSION["id"]; ?></p>
     </div>
   </div>
   <div class="row">

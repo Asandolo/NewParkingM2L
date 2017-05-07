@@ -59,6 +59,7 @@ function getplaceDispo(){
     $array = array();
     $i=0;
     while ($d=$s->fetch()){
+        echo $d["id_place"]."<br/>";
         $array[$i] = array(
             "id_place" => $d["id_place"],
             "num_place" => $d["num_place"]

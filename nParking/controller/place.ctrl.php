@@ -63,6 +63,10 @@ function getHistoriquePlace($id){
     return $array;
 }
 
+function addPlaces($num){
+    addPlacesData($num);
+}
+
 function getCHPlace($id){
     return selectCPLaceHist($id);
 }
