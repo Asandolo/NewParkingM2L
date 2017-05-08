@@ -4,7 +4,9 @@ if (!isset($_SESSION["mail"]) ) {
 	header('Location: login.php');
 }
 include("controller/membre.ctrl.php");
+include("controller/reserver.ctrl.php");
 
+trier();
 
 $user = getMembre($_SESSION["mail"]);
 

@@ -22,7 +22,8 @@ function getReserver($id){
 	$arPlace = array(
 		"date_debut_periode" => $p["date_debut_periode"],
 		"date_fin_periode" => $p["date_fin_periode"],
-		"num_place" => $p["num_place"]
+		"num_place" => $p["num_place"],
+        "id_place" => $p["id_place"]
 	);
 	return $arPlace;
 }
@@ -45,9 +46,25 @@ function setRang($idm){
     reserverPlacePrecise($idm,$resa["id_place"],$resa["date_fin_periode"]);
 }
 
-function trierRang(){
-    trierRangData();
-} 
+function selectRang(){
+    $r = selectRangData();
+    $membres = array();
+    $i = 0;
+    while($data = $r->fetch()){
+        $membres[$i] = array(
+            "id_membre" => $data["id_membre"]
+        );
+        $i++;
+    }
+    return $membres;
+}
+
+function trier(){
+    $m = selectRang();
+    foreach ($m as $membre){
+        setNonRang($membre["id_membre"]);
+    }
+}
 
 function getProcheResa(){
     $resa = getProcheResaData();

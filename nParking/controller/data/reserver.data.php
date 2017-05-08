@@ -65,6 +65,13 @@ function getProcheResaData(){
     return $resa;
 }
 
-function trierRangData(){
-    $tri = $_GLOBALS["bdd"]->prepare("UPDATE membre SET rang = 0 WHERE id_membre IN (SELECT id_membre FROM reserver, membre WHERE membre.id_membre = reserver.id_membre AND rang>0 AND date_debut_periode<= NOW())");
+function SelectRangData(){
+    $tri = $GLOBALS["bdd"]->query("SELECT membre.id_membre as 'id_membre' FROM reserver, membre WHERE membre.id_membre = reserver.id_membre AND rang>0 AND date_debut_periode<= NOW()");
+    return $tri;
+
+}
+
+function setNonRang($id){
+    $r = $GLOBALS["bdd"]->prepare("UPDATE membre SET rang = 0 WHERE id_membre = ?");
+    $r->execute(array($id));
 }

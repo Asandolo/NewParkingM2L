@@ -5,6 +5,8 @@ if (isset($_SESSION["mail"])) {
 }
 
 include("controller/membre.ctrl.php");
+include("controller/reserver.ctrl.php");
+trier();
 
 if(isset($_POST["conect"]))
 {

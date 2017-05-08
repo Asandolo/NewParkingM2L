@@ -1,7 +1,6 @@
 <?php 
 $titre = "Historique";
 include("includes/pages/header.php");
-include("controller/reserver.ctrl.php");
 ?>
 
 

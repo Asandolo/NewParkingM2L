@@ -2,7 +2,6 @@
 $titre = "Acceuil";
 include("includes/pages/header.php");
 include("controller/place.ctrl.php");
-include("controller/reserver.ctrl.php");
 
 
 ?>
