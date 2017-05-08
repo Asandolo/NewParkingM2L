@@ -1,6 +1,5 @@
 <?php
 include('data/attente.data.php');
-include('controller/reserver.ctrl.php');
 
 function getAttente(){
     $att =  getAttenteData();
