@@ -1,7 +1,6 @@
 <?php
 $titre = "Reservation";
 include('includes/pages/header.php');
-include('controller/reserver.ctrl.php');
 include('controller/place.ctrl.php');
 
 $m = getMembreById($_SESSION["id"]);
