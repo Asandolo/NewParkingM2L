@@ -199,21 +199,15 @@ function affichePlace($mail){
 			if($place["date_debut_periode"]<=$ajd){
 
 
-			    $njour = getJours($place["date_fin_periode"]);
-			    $ijour = date('d',strtotime($place["date_fin_periode"]));
-			    $mois = getMois($place["date_fin_periode"]);
-			    $anne = date('Y',strtotime($place["date_fin_periode"]));
-			    $d = $njour." ".$ijour." ".$mois." ".$anne;
-
-
-
 				$affiche = "<p style='font-size:20px'>Vous avez la place : <br /><strong>".$place["num_place"]."</strong></p>";
-				$affiche .= "<p style='font-size:20px'>Jusqu'au: <br /><strong>".$d."</strong></p>";
+				$affiche .= "<p style='font-size:20px'>Jusqu'au: <br /><strong>".formatDate($place["date_fin_periode"])."</strong></p>";
 			}
 			else{
-				$deb_resa_fr=date("d/m/Y", strtotime($place['date_debut_periode'])) ;
-				$fin_resa_fr=date("d/m/Y", strtotime($place['date_fin_periode'])) ;
-				$affiche = "<h2>Vous avez la place : "."<br />".$place["num_place"]."</br> du ".$deb_resa_fr." au ".$fin_resa_fr."</h2>" ;
+
+
+				$deb_resa_fr=formatDate($place['date_debut_periode']);
+				$fin_resa_fr=formatDate($place['date_fin_periode']);
+				$affiche = "<h2>Vous aurez la place : "."<br />".$place["num_place"]."</br> du ".$deb_resa_fr." au ".$fin_resa_fr."</h2>" ;
 			}
 		}
 	}else{

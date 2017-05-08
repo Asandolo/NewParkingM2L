@@ -67,4 +67,18 @@ function getMois($date){
     }
 }
 
+
+function formatDate($date){
+
+    $njour = getJours($date);
+    $ijour = date('d',strtotime($date));
+    $mois = getMois($date);
+    $anne = date('Y',strtotime($date));
+    $d = $njour." ".$ijour." ".$mois." ".$anne;
+
+    return $d;
+
+
+}
+
 ?>
