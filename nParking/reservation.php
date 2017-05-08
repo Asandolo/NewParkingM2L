@@ -11,7 +11,7 @@ if (!(getPlaceMembre($m["id"])==null && $m["rang"]<=0))
 
 if(isset($_POST["OUI"])){
 	setRang($_SESSION["id"]);
-	header('Location: index.php');
+	//header('Location: index.php');
 }
 
 if(getcountPd()==0){

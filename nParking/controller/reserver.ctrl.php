@@ -28,7 +28,6 @@ function getReserver($id){
 }
 
 function reserver($idm){
-    echo "ID : ".$idm."<br />";
     $c = getcountPd();
     if ($c>0){
         $places = getPlaceDispo();
@@ -42,12 +41,26 @@ function setRang($idm){
     $r = getMaxRang();
     $r++;
     reserverRang($idm,$r);
-    $resa = getProcheResaData();
+    $resa = getProcheResa();
     reserverPlacePrecise($idm,$resa["id_place"],$resa["date_fin_periode"]);
 }
 
+function trierRang(){
+    trierRangData();
+} 
+
 function getProcheResa(){
-    return getProcheResa();
+    $resa = getProcheResaData();
+    $res = array();
+    $i=0;
+    while($r = $resa->fetch()){
+        $res[$i] = array(
+            "id_place" => $r["id_place"],
+            "date_fin_periode" => $r["date_fin_periode"]
+            );
+    }
+    return $res[0];
+
 }
 
 function getcountPd(){
@@ -60,7 +73,6 @@ function getplaceDispo(){
     $array = array();
     $i=0;
     while ($d=$s->fetch()){
-        echo $d["id_place"]."<br/>";
         $array[$i] = array(
             "id_place" => $d["id_place"],
             "num_place" => $d["num_place"]

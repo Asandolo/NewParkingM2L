@@ -40,11 +40,12 @@ function reserverPlace($idm,$idp){
 }
 
 function reserverPlacePrecise($idm,$idp,$datepre){
-    $datepre = $datepre+24*60*60;
-    $week = $datepre+7*24*60*60;
-    $w = date("Y-m-d",$week);
-    $i = $GLOBALS["bdd"]->prepare("INSERT INTO reserver (date_fin_periode, id_membre, id_place, date_debut_periode) VALUES(?,?,?,?");
-    $i->execute(array($w,$idm,$idp,$datepre));
+    $d1 = date('U',strtotime($datepre))+24*60*60;
+    $ddeb = date('Y-m-d',$d1);
+    $d2 = $d1+7*24*60*60;
+    $dfin = date('Y-m-d',$d2);
+    $i = $GLOBALS["bdd"]->prepare("INSERT INTO reserver (date_fin_periode, id_membre, id_place, date_debut_periode) VALUES(?,?,?,?)");
+    $i->execute(array($dfin,$idm,$idp,$ddeb));
 }
 
 function reserverRang($idm,$rang){
@@ -59,7 +60,11 @@ function getMaxRang(){
 }
 
 function getProcheResaData(){
-    $resa = $GLOBALS["bdd"]->query("SELECT id_place,date_fin_periode FROM reserver WHERE date_fin_periode = (SELECT MIN(date_fin_periode) FROM reserver");
-    $r = $resa->fetch();
-    return $r;
+    $resa = $GLOBALS["bdd"]->prepare("SELECT id_place,date_fin_periode FROM reserver WHERE date_fin_periode IN (SELECT MIN(date_fin_periode) FROM reserver) AND date_fin_periode >= NOW() ");
+    $resa->execute();
+    return $resa;
+}
+
+function trierRangData(){
+    $tri = $_GLOBALS["bdd"]->prepare("UPDATE membre SET rang = 0 WHERE id_membre IN (SELECT id_membre FROM reserver, membre WHERE membre.id_membre = reserver.id_membre AND rang>0 AND date_debut_periode<= NOW())");
 }
